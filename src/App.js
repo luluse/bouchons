@@ -37,7 +37,7 @@ const GET_POSTS = gql`{
 
 function App() {
   
-  const { loading, data } = useQuery(GET_POSTS, {
+  const { loading, data, refetch } = useQuery(GET_POSTS, {
     fetchPolicy: 'network-only'
   });
 
@@ -54,7 +54,7 @@ function App() {
       </header>
       {data.posts.length === 0 && <Empty />}
       {data.posts.map(post => (
-        < Post key={post.id} post = {post} />
+        < Post key={post.id} post={post} refetch={refetch}/>
       ))}
 
     </>
