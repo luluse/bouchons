@@ -13,7 +13,7 @@ const classes = {
   nav: "my-4 mx-2 text-center"
 };
 
-function Post() {
+function Post( { post }) {
   return (
     <>
       <div className={classes.container}>
@@ -21,19 +21,19 @@ function Post() {
           <tbody>
             <tr className={classes.tr}>
               <td className={classes.td}>id</td>
-              <td className="p-3">insert id</td>
+              <td className="p-3">{post.id}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.td}>title</td>
-              <td className="p-3">insert title</td>
+              <td className="p-3">{post.title}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.td}>body</td>
-              <td className="p-3">insert body</td>
+              <td className="p-3">{post.body}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.td}>createdAt</td>
-              <td className="p-3">insert createdAt</td>
+              <td className="p-3">{post.createdAt}</td>
             </tr>
           </tbody>
         </table>

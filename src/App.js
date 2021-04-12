@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { gql } from 'apollo-boost'
-import { useApolloClient } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
+import Post from './components/Post'
 
 const classes = {
   h2: "text-sm font-semibold",
@@ -23,20 +24,23 @@ function Empty() {
   );
 }
 
-function App() {
-  const client = useApolloClient()
-
-  client.query({
-    query: gql`{
+const GET_POSTS = gql`{
       posts {
           id
           body
           title
+          createdAt
           }
-        }`
-  }).then(data => {
-    console.log(data)
-  })
+        }
+`
+
+
+function App() {
+  
+  const { loading, data } = useQuery(GET_POSTS)
+
+  if (loading) return <div>Loading...</div>;
+  console.log(data)
 
   return (
     <>
@@ -46,7 +50,11 @@ function App() {
           New Post
         </Link>
       </header>
-      <Empty />
+      {data.posts.length === 0 && <Empty />}
+      {data.posts.map(post => (
+        < Post key={post.id} post = {post} />
+      ))}
+
     </>
   );
 }
