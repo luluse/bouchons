@@ -37,7 +37,9 @@ const GET_POSTS = gql`{
 
 function App() {
   
-  const { loading, data } = useQuery(GET_POSTS)
+  const { loading, data } = useQuery(GET_POSTS, {
+    fetchPolicy: 'network-only'
+  });
 
   if (loading) return <div>Loading...</div>;
   console.log(data)
