@@ -41,7 +41,7 @@ function Post( { post }) {
       <nav className={classes.nav}>
         <ul>
           <li className={classes.li}>
-            <Link to={`/edit/id`} className={classes.edit}>
+            <Link to={`/edit/${post.id}`} className={classes.edit}>
               Edit
             </Link>
           </li>
