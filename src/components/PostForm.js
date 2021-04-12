@@ -12,10 +12,19 @@ const classes = {
   error: "font-bold text-red-500"
 };
 
-function PostForm() {
+function PostForm({ onSave }) {
+  
+  const[title, setTitle] = React.useState('');
+  const[body, setBody] = React.useState('')
+
+  function onSubmit(event){
+    event.preventDefault();
+    onSave({ title, body })
+  }
+
   return (
     <div className={classes.container}>
-      <form className={classes.form}>
+      <form onSubmit={onSubmit} className={classes.form}>
         <div className={classes.div}>
           <label className={classes.label}>Title</label>
           <input
@@ -23,6 +32,7 @@ function PostForm() {
             name="title"
             placeholder="Enter your post title"
             className={classes.input}
+            onChange={event => setTitle(event.target.value)}
           />
         </div>
         <div className={classes.div}>
@@ -32,6 +42,7 @@ function PostForm() {
             name="body"
             className={classes.input}
             placeholder="Enter your post content"
+            onChange={event => setBody(event.target.value)}
           />
         </div>
         <div>
