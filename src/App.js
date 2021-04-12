@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { gql } from 'apollo-boost'
+import { useApolloClient } from '@apollo/react-hooks'
 
 const classes = {
   h2: "text-sm font-semibold",
@@ -22,6 +24,20 @@ function Empty() {
 }
 
 function App() {
+  const client = useApolloClient()
+
+  client.query({
+    query: gql`{
+      posts {
+          id
+          body
+          title
+          }
+        }`
+  }).then(data => {
+    console.log(data)
+  })
+
   return (
     <>
       <header className={classes.header}>
