@@ -14,7 +14,7 @@ mutation CreatePost($title: String!, $body: String!) {
 
 function NewPost() {
   const history = useHistory() 
-  const [createPost] = useMutation(CREATE_POST, {onCompleted: () => history.push('/')})
+  const [createPost, {loading, error}] = useMutation(CREATE_POST, {onCompleted: () => history.push('/')})
 
   function onSave({ title, body }) {
     createPost({ variables: { title, body }});
@@ -26,7 +26,7 @@ function NewPost() {
         <h2 className="text-sm font-semibold">New Post</h2>
       </header>
       <div className="bg-gray-100 p-4">
-        <PostForm onSave={onSave}/>
+        <PostForm onSave={onSave} loading={loading} error={error}/>
       </div>
     </div>
   );
