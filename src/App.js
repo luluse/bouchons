@@ -8,8 +8,7 @@ import styled from 'styled-components'
 
 const Title = styled.h2`
 font-weight: bold;
-color: green; 
-/* margin: 0 auto; */
+color: #fff; 
 justify-self: start;
 align-self: center;
 `
@@ -17,28 +16,27 @@ align-self: center;
 const Button = styled.button`
 justify-self: end;
 align-self: center;
-color: #2CA58D;
 font-size: 20px;
-
-padding: 10px 30px; 
 transition: 1s;
-
-border: solid 1px #EE3769; 
 background: #222;
-border-radius: 30px;
-transition: #EE3769 0.3s 0.1s ease-out;
+transition: #EE3769 0.5s 0.3s ease-out;
+border: none;
 
 a{
+  padding: 10px 30px;
+  border-radius: 30px;
+  border: solid 1px #EE3769;
   color: #EE3769;
   text-decoration: none;
-}
 
   &:hover {
     color: #fff;
-    box-shadow: inset 0 0 0 10px rgba(#EE3769,1);
-    /* box-shadow: 0 20px 40px rgba(#EE3769, 0.15); */
-       transform: translateY(-3px);
-
+    border: solid 1px #fff;
+    }
+  }
+  
+&:hover{
+  transform: translateY(-3px);
 }
 `
 
@@ -50,20 +48,12 @@ padding: 10px 20px;
 background: #222;
 `
 
-const classes = {
-  h2: "text-sm font-semibold",
-  header:
-    "bg-gray-300 text-gray-700 py-3 px-4 flex items-center justify-between",
-  newPost:
-    "bg-green-500 text-white rounded px-4 text-xs py-2 uppercase font-semibold tracking-wide",
-  link: "text-blue-500 underline hover:text-blue-700"
-};
 
 function Empty() {
   return (
     <div className="text-center">
       {"No posts yet. "}
-      <Link to="/new" className={classes.link}>
+      <Link to="/new">
         Create one?
       </Link>
     </div>
@@ -82,7 +72,7 @@ const GET_POSTS = gql`{
 
 
 function App() {
-  
+
   const { loading, data, refetch } = useQuery(GET_POSTS, {
     fetchPolicy: 'network-only'
   });
@@ -95,13 +85,13 @@ function App() {
       <Header >
         <Title>All Posts</Title>
         <Button>
-        <Link to="/new" >
-          New Post
+          <Link to="/new" >
+            New Post
         </Link></Button>
       </Header>
       {data.posts.length === 0 && <Empty />}
       {data.posts.map(post => (
-        < Post key={post.id} post={post} refetch={refetch}/>
+        < Post key={post.id} post={post} refetch={refetch} />
       ))}
 
     </>
