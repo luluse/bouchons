@@ -2,9 +2,9 @@
   <img alt="react" src="./public/logo192.png" width="80" />
 </p>
 
-# Bouchons
+# ToDoApp
 
- An App to share with the world your favorite bouchons
+A TODO app to keep track of my tasks during the day.
 
 ### Tools
 - React.js 
